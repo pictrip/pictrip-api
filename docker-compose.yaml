@@ -1,0 +1,45 @@
+version: "3"
+services:
+
+  web:
+    image: nginx:latest
+    ports:
+    - "${APP_PORT}:80"
+    - "443:443"
+    volumes:
+    - ./docker/nginx/conf:/etc/nginx/conf.d
+    - ./:/var/www/
+    - ./docker/nginx/logs:/var/log/nginx/
+    links:
+    - app
+
+  mysql:
+    image: mysql:5.7.22
+    ports:
+    - "${DB_PORT}:3306"
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=${DB_DATABASE}
+    - MYSQL_USER=${DB_USERNAME}
+    - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+    - ./docker/mysql/data:/var/lib/mysql
+    - ./docker/mysql/init:/docker-entrypoint-initdb.d
+
+  app:
+    build:
+      context: ./docker/app
+      args:
+        userid: "${USERID}"
+        groupid: "${USERID}"
+    volumes:
+    - ./:/var/www
+    links:
+    - mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - 8090:80
+    links:
+    - mysql:db
