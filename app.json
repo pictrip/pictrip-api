@@ -5,7 +5,15 @@
   "env": {
     "CLEARDB_DATABASE_URL": {
       "required": true
-    }
+    },
+    "APP_DEBUG": "true",
+    "APP_ENV": "local",
+    "APP_KEY": "base64:2/HJTZ57msXqZHMhyWfj/Q7caL16p3cvh4kcp/Eg+6o=",
+    "APP_URL": "https://pictrip-api-pr-1.herokuapp.com/",
+    "DB_CONNECTION": "heroku_mysql",
+    "CACHE_DRIVER": "file",
+    "QUEUE_DRIVER": "sync",
+    "SESSION_DRIVER": "file"
   },
   "formation": {
     "web": {
