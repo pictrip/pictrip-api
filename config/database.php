@@ -1,5 +1,6 @@
 <?php
 
+// Heroku config
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
 return [
@@ -64,6 +65,21 @@ return [
             'username' => isset($url["user"]) ? $url["user"] : env('DB_USERNAME'),
             'password' => isset($url["pass"]) ? $url["pass"] : env('DB_PASSWORD'),
             'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        'travis' => [
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'port' => '3306',
+            'database' => 'travis',
+            'username' => 'root',
+            'password' => '',
+            'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
