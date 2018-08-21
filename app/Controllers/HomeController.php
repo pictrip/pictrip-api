@@ -2,17 +2,12 @@
 
 namespace App\Controllers;
 
-use App\Features\Foursquare\FoursquareMethods;
-use App\Features\Foursquare\FoursquareService;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function __invoke(FoursquareService $foursquare)
+    public function __invoke()
     {
-        $res = $foursquare->get(FoursquareMethods::CATEGORIES);
-        dd($res);
-
-        return ['hello' => 'World'];
+        return ['message' => 'API for '.config('app.name')];
     }
 }
