@@ -17,7 +17,7 @@ class AuthTest extends TestCase
     {
         $this->artisan('passport:install', ['--no-interaction' => true]);
 
-        $response = $this->post('/api/register', [
+        $response = $this->post('/register', [
             'name' => 'Test',
             'email' => 'email@local.host',
             'password' => '123456',
@@ -52,7 +52,7 @@ class AuthTest extends TestCase
 
         $user = factory(User::class)->create(['password' => bcrypt('123456')]);
 
-        $response = $this->post('/api/login', [
+        $response = $this->post('/login', [
             'email' => $user->email,
             'password' => '123456',
         ]);
@@ -82,7 +82,7 @@ class AuthTest extends TestCase
         $user = factory(User::class)->create(['password' => bcrypt('123456')]);
         $token = $user->createToken('App')->accessToken;
 
-        $response = $this->get('/api/user', [
+        $response = $this->get('/user', [
             'Authorization' => 'Bearer '.$token
         ]);
         $response->assertOk();
