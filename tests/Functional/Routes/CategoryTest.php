@@ -17,7 +17,7 @@ class CategoryTest extends TestCase
     {
         factory(Category::class, 10)->create();
 
-        $response = $this->get('/api/categories?limit=1');
+        $response = $this->get('/categories?limit=1');
 
         $response->assertOk();
         $response->assertJsonStructure([
@@ -49,7 +49,7 @@ class CategoryTest extends TestCase
         factory(Category::class, 2)->create();
         $categories = factory(Category::class, 2)->create(['name' => 'beach']);
 
-        $response = $this->get('/api/categories?name=beach');
+        $response = $this->get('/categories?name=beach');
 
         $response->assertOk();
         $response->assertJsonFragment([
