@@ -3,12 +3,20 @@
 namespace Tests\Functional\Routes;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $user = factory(User::class)->create();
+        $this->actingAs($user, 'api');
+    }
 
     /**
      * @test
