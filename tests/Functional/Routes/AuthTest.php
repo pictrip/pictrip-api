@@ -21,7 +21,6 @@ class AuthTest extends TestCase
             'name' => 'Test',
             'email' => 'email@local.host',
             'password' => '123456',
-            'password_confirmation' => '123456',
         ]);
 
         $response->assertStatus(201);
